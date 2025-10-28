@@ -8,14 +8,21 @@ REGRAS_DESCONTO = {
     'PERCENTUAL': 0.10
 }
 
+
 def calcular_valor_ingresso(tipo, categoria):
   valor = VALORES_BASE[tipo]
   if categoria == 'MEIA':
     valor *= 0.5 # Convertendo valor para a metade do valor cheio
   return valor
 
+
 def exibir_compra(compra):
+  subtotal = sum(ingresso['valor'] for ingresso in compra)
+  quantidade_total = len(compra)
+  desconto_aplicado = 0
+
   print(compra)
+
 
 def comprar_ingresso():
   print("Bem vindo à nossa bilheteria!!")
