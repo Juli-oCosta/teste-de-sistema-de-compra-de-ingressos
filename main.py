@@ -36,13 +36,28 @@ def comprar_ingresso():
   for i in range(qtd_ingresso):
     print(f"\nAdicionando Ingresso {i+1} de {qtd_ingresso}")
 
-    # Tipo
-    # Categoria
+    while True:
+      try:
+        tipo_ingresso_input = input("Escolha o tipo do ingresso (VIP/Normal): ").upper()
+      if tipo_ingresso_input in VALORES_BASE:
+        tipo_ingresso = tipo_ingresso_input
+        break
+      else:
+        print("Por favor, digite um tipo válido.")
+
+    while True:
+      try:
+        categoria_ingresso_iput = input("Escolha a categoria (Inteira/Meia): ").upper()
+      if categoria_ingresso_input in ['INTEIRA', 'MEIA']:
+        categoria_ingresso = categoria_ingresso_input
+        break
+      else:
+        print("Por favor, digite uma categoria válida.")
     # Valor
-    # Criar dictionary
+
     ingresso_atual = {
-        "tipo": a,
-        "categoria": b,
+        "tipo": tipo_ingresso,
+        "categoria": categoria_ingresso,
         "valor": c
     }
     carrinho_de_compras.append(ingresso_atual)
