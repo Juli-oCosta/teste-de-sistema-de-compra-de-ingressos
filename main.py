@@ -17,11 +17,32 @@ def calcular_valor_ingresso(tipo, categoria):
 
 
 def exibir_compra(compra):
-  subtotal = sum(ingresso['valor'] for ingresso in compra)
-  quantidade_total = len(compra)
-  desconto_aplicado = 0
+    subtotal = sum(ingresso['valor'] for ingresso in compra)
+    quantidade_total = len(compra)
+    desconto_aplicado = 0
 
-  print(compra)
+    print("\n" + "="*30)
+    print("      RESUMO DA COMPRA")
+    print("="*30)
+
+    print("Itens Comprados:")
+    for ingresso in compra:
+        print(f"- 1x Ingresso {ingresso['tipo']} ({ingresso['categoria']}): R$ {ingresso['valor']:.2f}")
+
+    print("-"*30)
+    
+    print(f"Subtotal: R$ {subtotal:.2f}")
+    print(f"Total de Ingressos: {quantidade_total}")
+
+    if quantidade_total >= REGRAS_DESCONTO['QUANTIDADE_MINIMA']:
+        desconto_aplicado = subtotal * REGRAS_DESCONTO['PERCENTUAL']
+        print(f"Desconto Aplicado ({REGRAS_DESCONTO['PERCENTUAL']*100:.0f}%): -R$ {desconto_aplicado:.2f}")
+
+    total_final = subtotal - desconto_aplicado
+
+    print("-"*30)
+    print(f"TOTAL A PAGAR: R$ {total_final:.2f}")
+    print("="*30)
 
 
 def comprar_ingresso():
@@ -33,7 +54,7 @@ def comprar_ingresso():
   while True:
     try:
       qtd_ingresso = int(input("Digite a quantidade de ingressos que deseja comprar: "))
-      if qtd_ingresso >= 0: 
+      if qtd_ingresso >= 0:
         break
       else:
         print("Por favor, digite uma quantidade válida.")
@@ -69,7 +90,7 @@ def comprar_ingresso():
     carrinho_de_compras.append(ingresso_atual)
 
     print(f"Ingresso {tipo_ingresso} ({categoria_ingresso}) adicionado! Valor: R${valor_ingresso:.2f}")
- 
+
   if carrinho_de_compras:
       exibir_compra(carrinho_de_compras)
   else:
